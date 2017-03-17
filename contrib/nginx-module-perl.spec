@@ -49,6 +49,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
+BuildRequires: curl
 Requires: nginx == %{?epoch:%{epoch}:}1.11.10-1%{?dist}.ngx
 
 %description

@@ -34,6 +34,7 @@ done
 cp -a $PRJDIR/*.spec $PRJDIR/contrib/
 
 sed -i "s#^\%if 0\%{?rhel} == 7#\%if ( 0\%{\?rhel} == 7 ) || ( 0\%{?fedora} >= 18 )#" $PRJDIR/contrib/*.spec
+sed -i "s#^BuildRequires: pcre-devel#BuildRequires: pcre-devel\nBuildRequires: curl#" $PRJDIR/contrib/*.spec
 sed -i "s|^\%prep|\%prep\n\
 curl https://www.openssl.org/source/$OPENSSL.tar.gz -o \%{_sourcedir}/$OPENSSL.tar.gz\n\
 tar -zxf \%{_sourcedir}/$OPENSSL.tar.gz -C \%{_builddir}\n\
