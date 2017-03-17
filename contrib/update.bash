@@ -41,7 +41,7 @@ tar -zxf \%{_sourcedir}/nginx-$NGINXVER.tar.gz -C \%{_sourcedir}\n\
 |" $PRJDIR/contrib/*.spec
 
 sed -i "s|^\%setup -q$|\%setup\n\
-tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{main_version}/nginx-\%{main_version}.tar.gz\n\
+tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
 |" $PRJDIR/contrib/*.spec
 
 sed -i "s|^tar --strip-components=1.*|tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{main_version}/nginx-\%{main_version}.tar.gz\n\
