@@ -66,7 +66,7 @@ tar -zxf %{_sourcedir}/nginx-1.11.5.tar.gz -C %{_sourcedir}
 %setup -qcTn %{name}-%{main_version}
 find /builddir/ -name "*.tar.gz"
 find .
-tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{main_version}/nginx-%{main_version}.tar.gz
+tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
 
 
 tar zxf %{SOURCE100}
