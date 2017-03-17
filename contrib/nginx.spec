@@ -47,12 +47,13 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.11.5
+%define main_version 1.11.10
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
-%define WITH_CC_OPT $(echo %{optflags} $(pcre-config --cflags))
+%define WITH_CC_OPT $(echo %{optflags} $(pcre-config --cflags)) -fPIC
+%define WITH_LD_OPT -Wl,-z,relro -Wl,-z,now -pie
 
 %define BASE_CONFIGURE_ARGS $(echo "--prefix=%{_sysconfdir}/nginx --sbin-path=%{_sbindir}/nginx --modules-path=%{_libdir}/nginx/modules --conf-path=%{_sysconfdir}/nginx/nginx.conf --error-log-path=%{_localstatedir}/log/nginx/error.log --http-log-path=%{_localstatedir}/log/nginx/access.log --pid-path=%{_localstatedir}/run/nginx.pid --lock-path=%{_localstatedir}/run/nginx.lock --http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp --http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp --http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp --user=%{nginx_user} --group=%{nginx_group} --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-openssl=%{_builddir}/openssl-1.1.0e --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module")
 
@@ -76,6 +77,7 @@ Source9: nginx.upgrade.sh
 Source10: nginx.suse.logrotate
 Source11: nginx-debug.service
 Source12: COPYRIGHT
+Source13: nginx.check-reload.sh
 
 License: 2-clause BSD-like license
 
@@ -96,7 +98,7 @@ a mail proxy server.
 %prep
 curl https://www.openssl.org/source/openssl-1.1.0e.tar.gz -o %{_sourcedir}/openssl-1.1.0e.tar.gz
 tar -zxf %{_sourcedir}/openssl-1.1.0e.tar.gz -C %{_builddir}
-tar -zxf %{_sourcedir}/nginx-1.11.5.tar.gz -C %{_sourcedir}
+tar -zxf %{_sourcedir}/nginx-1.11.10.tar.gz -C %{_sourcedir}
 
 %setup
 tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
@@ -111,12 +113,14 @@ sed -e 's|%%DEFAULTSTART%%||g' -e 's|%%DEFAULTSTOP%%|0 1 2 3 4 5 6|g' \
 %build
 ./configure %{BASE_CONFIGURE_ARGS} \
     --with-cc-opt="%{WITH_CC_OPT}" \
+    --with-ld-opt="%{WITH_LD_OPT}" \
     --with-debug
 make %{?_smp_mflags}
 %{__mv} %{bdir}/objs/nginx \
     %{bdir}/objs/nginx-debug
 ./configure %{BASE_CONFIGURE_ARGS} \
-    --with-cc-opt="%{WITH_CC_OPT}"
+    --with-cc-opt="%{WITH_CC_OPT}" \
+    --with-ld-opt="%{WITH_LD_OPT}"
 make %{?_smp_mflags}
 
 %install
@@ -167,6 +171,8 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
 %{__mkdir} -p $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx
 %{__install} -m755 %SOURCE9 \
     $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/upgrade
+%{__install} -m755 %SOURCE13 \
+    $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/check-reload
 %else
 # install SYSV init stuff
 %{__mkdir} -p $RPM_BUILD_ROOT%{_initrddir}
@@ -309,6 +315,23 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Feb 14 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.11.10
+
+* Tue Jan 24 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.11.9
+- Extended hardening build flags.
+- Added check-reload target to init script / systemd service.
+
+* Tue Dec 27 2016 Konstantin Pavlov <thresh@nginx.com>
+- 1.11.8
+
+* Tue Dec 13 2016 Konstantin Pavlov <thresh@nginx.com>
+- 1.11.7
+
+* Tue Nov 15 2016 Konstantin Pavlov <thresh@nginx.com>
+- 1.11.6
+
 * Mon Oct 10 2016 Andrei Belov <defan@nginx.com>
 - 1.11.5
 
@@ -329,7 +352,7 @@ fi
 * Tue May 31 2016 Konstantin Pavlov <thresh@nginx.com>
 - 1.11.1
 
-* Wed May 24 2016 Sergey Budnevitch <sb@nginx.com>
+* Tue May 24 2016 Sergey Budnevitch <sb@nginx.com>
 - Fixed logrotate error if nginx is not running
 - 1.11.0
 

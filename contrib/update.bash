@@ -1,9 +1,9 @@
 !/bin/bash
 set -e
 OPENSSL='openssl-1.1.0e'
-NGINXVER='1.11.5'
+NGINXVER='1.11.10'
 NGINXREL='1'
-NJSVER='0.1.3'
+NJSVER='0.1.9'
 
 REPOURL="http://nginx.org/packages/mainline/centos/7/SRPMS"
 RPMLIST="nginx-$NGINXVER-$NGINXREL.el7.ngx.src.rpm
