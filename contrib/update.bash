@@ -15,7 +15,7 @@ nginx-module-xslt-$NGINXVER-$NGINXREL.el7.ngx.src.rpm"
 
 TMPDIR='/tmp'
 PRJDIR="$PWD"
-ls "$PWD" | egrep -v 'contrib' | xargs rm -rf
+ls "$PWD" | egrep -v 'contrib|LICENSE|README' | xargs rm -rf
 
 function download_and_unzip_rpm {
 	RPMNAME=$1
