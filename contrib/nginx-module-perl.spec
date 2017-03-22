@@ -25,14 +25,14 @@ BuildRequires: libopenssl-devel
 Epoch: %{epoch}
 %endif
 
-%define main_version 1.11.10
+%define main_version 1.11.11
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx Perl dynamic module
 Name: nginx-module-perl
-Version: 1.11.10
+Version: 1.11.11
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -50,7 +50,7 @@ BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
 BuildRequires: curl
-Requires: nginx == %{?epoch:%{epoch}:}1.11.10-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.11.11-1%{?dist}.ngx
 
 %description
 nginx Perl dynamic module.
@@ -68,7 +68,7 @@ nginx Perl dynamic module.
 %prep
 curl https://www.openssl.org/source/openssl-1.1.0e.tar.gz -o %{_sourcedir}/openssl-1.1.0e.tar.gz
 tar -zxf %{_sourcedir}/openssl-1.1.0e.tar.gz -C %{_builddir}
-tar -zxf %{_sourcedir}/nginx-1.11.10.tar.gz -C %{_sourcedir}
+tar -zxf %{_sourcedir}/nginx-1.11.11.tar.gz -C %{_sourcedir}
 
 %setup -qcTn %{name}-%{main_version}
 tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
@@ -145,6 +145,9 @@ BANNER
 fi
 
 %changelog
+* Tue Mar 21 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.11.11
+
 * Tue Jan 24 2017 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.11.9
 

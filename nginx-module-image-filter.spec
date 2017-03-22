@@ -20,14 +20,14 @@ BuildRequires: libopenssl-devel
 Epoch: %{epoch}
 %endif
 
-%define main_version 1.11.10
+%define main_version 1.11.11
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx image filter dynamic module
 Name: nginx-module-image-filter
-Version: 1.11.10
+Version: 1.11.11
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -44,7 +44,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.11.10-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.11.11-1%{?dist}.ngx
 
 %description
 nginx image filter dynamic module.
@@ -126,6 +126,9 @@ BANNER
 fi
 
 %changelog
+* Tue Mar 21 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.11.11
+
 * Tue Jan 24 2017 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.11.9
 
