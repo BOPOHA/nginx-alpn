@@ -97,9 +97,8 @@ a mail proxy server.
 %endif
 
 %prep
-curl https://www.openssl.org/source/openssl-1.1.0e.tar.gz -o %{_sourcedir}/openssl-1.1.0e.tar.gz
-tar -zxf %{_sourcedir}/openssl-1.1.0e.tar.gz -C %{_builddir}
 tar -zxf %{_sourcedir}/nginx-1.11.11.tar.gz -C %{_sourcedir}
+tar -zxf %{_sourcedir}/%{_sourcedir}/%{name}-%{version}/openssl-1.1.0e.tar.gz -C %{_builddir}
 
 %setup
 tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz

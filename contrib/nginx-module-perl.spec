@@ -66,9 +66,8 @@ nginx Perl dynamic module.
 %define MODULE_CONFIGURE_ARGS $(echo "--with-http_perl_module=dynamic")
 
 %prep
-curl https://www.openssl.org/source/openssl-1.1.0e.tar.gz -o %{_sourcedir}/openssl-1.1.0e.tar.gz
-tar -zxf %{_sourcedir}/openssl-1.1.0e.tar.gz -C %{_builddir}
 tar -zxf %{_sourcedir}/nginx-1.11.11.tar.gz -C %{_sourcedir}
+tar -zxf %{_sourcedir}/%{_sourcedir}/%{name}-%{version}/openssl-1.1.0e.tar.gz -C %{_builddir}
 
 %setup -qcTn %{name}-%{main_version}
 tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
