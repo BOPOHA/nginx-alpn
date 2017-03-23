@@ -49,7 +49,6 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-BuildRequires: curl
 Requires: nginx == %{?epoch:%{epoch}:}1.11.11-1%{?dist}.ngx
 
 %description
@@ -66,8 +65,8 @@ nginx GeoIP dynamic modules.
 %define MODULE_CONFIGURE_ARGS $(echo "--with-http_geoip_module=dynamic --with-stream_geoip_module=dynamic")
 
 %prep
-tar -zxf %{_sourcedir}/nginx-1.11.11.tar.gz -C %{_sourcedir}
-tar -zxf %{_sourcedir}/%{_sourcedir}/%{name}-%{version}/openssl-1.1.0e.tar.gz -C %{_builddir}
+tar -zxf %{_sourcedir}/nginx-%{main_version}.tar.gz -C %{_sourcedir}
+tar -zxf %{_sourcedir}/%{name}-%{version}/openssl-1.1.0e.tar.gz -C %{_builddir}
 
 %setup -qcTn %{name}-%{main_version}
 tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
