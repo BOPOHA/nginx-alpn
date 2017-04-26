@@ -47,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.11.13
+%define main_version 1.13.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -308,6 +308,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Apr 25 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.0
+
 * Tue Apr  4 2017 Konstantin Pavlov <thresh@nginx.com>
 - 1.11.13
 - CentOS7/RHEL7: made upgrade loops/timeouts configurable via
