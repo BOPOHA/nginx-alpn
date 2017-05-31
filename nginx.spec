@@ -47,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.13.0
+%define main_version 1.13.1
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -262,6 +262,10 @@ Thanks for using nginx!
 Please find the official documentation for nginx here:
 * http://nginx.org/en/docs/
 
+Please subscribe to nginx-announce mailing list to get
+the most important news about nginx:
+* http://nginx.org/en/support.html
+
 Commercial subscriptions for nginx are available on:
 * http://nginx.com/products/
 
@@ -308,6 +312,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue May 30 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.1
+
 * Tue Apr 25 2017 Konstantin Pavlov <thresh@nginx.com>
 - 1.13.0
 
