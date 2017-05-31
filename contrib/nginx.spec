@@ -97,6 +97,7 @@ a mail proxy server.
 
 %prep
 tar -zxf %{_sourcedir}/nginx-%{main_version}.tar.gz -C %{_sourcedir}
+find %{_sourcedir}
 tar -zxf %{_sourcedir}/%{name}-%{version}/openssl-1.1.0e.tar.gz -C %{_builddir}
 
 %setup
