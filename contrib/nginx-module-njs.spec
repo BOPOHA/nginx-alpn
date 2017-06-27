@@ -32,7 +32,7 @@ Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}
 
-Source0: http://nginx.org/download/nginx-%{main_version}.tar.gz
+Source0: nginx-%{main_version}.tar.gz
 Source1: COPYRIGHT
 
 Source100: njs-0.1.10.tar.gz
