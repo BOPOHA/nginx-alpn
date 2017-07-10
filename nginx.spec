@@ -47,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.13.1
+%define main_version 1.13.2
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -312,6 +312,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Jun 27 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.2
+
 * Tue May 30 2017 Konstantin Pavlov <thresh@nginx.com>
 - 1.13.1
 
