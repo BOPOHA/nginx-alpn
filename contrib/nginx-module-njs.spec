@@ -19,14 +19,14 @@ BuildRequires: libopenssl-devel
 Epoch: %{epoch}
 %endif
 
-%define main_version 1.13.2
+%define main_version 1.13.3
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx nginScript dynamic modules
 Name: nginx-module-njs
-Version: 1.13.2.0.1.11
+Version: 1.13.3.0.1.11
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -44,7 +44,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.13.2-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.13.3-1%{?dist}.ngx
 
 %description
 nginx nginScript dynamic modules.
@@ -135,6 +135,9 @@ BANNER
 fi
 
 %changelog
+* Tue Jul 11 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.13.3
+
 * Tue Jun 27 2017 Konstantin Pavlov <thresh@nginx.com>
 - njs module updated to 0.1.11
 
