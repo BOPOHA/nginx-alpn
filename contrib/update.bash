@@ -1,9 +1,9 @@
-!/bin/bash
+#!/bin/bash
 set -e
 OPENSSL='openssl-1.1.0e'
-NGINXVER='1.13.3'
+NGINXVER='1.13.4'
 NGINXREL='1'
-NJSVER='0.1.11'
+NJSVER='0.1.12'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
 REPOURL="https://nginx.org/packages/mainline/centos/7/SRPMS"
