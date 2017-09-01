@@ -65,6 +65,7 @@ Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}
 
+Source90: openssl-1.1.0e.tar.gz
 Source0: http://nginx.org/download/%{name}-%{version}.tar.gz
 Source1: logrotate
 Source2: nginx.init.in
@@ -78,7 +79,7 @@ Source10: nginx.suse.logrotate
 Source11: nginx-debug.service
 Source12: COPYRIGHT
 Source13: nginx.check-reload.sh
-Source14: openssl-1.1.0e.tar.gz
+
 License: 2-clause BSD-like license
 
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
@@ -97,8 +98,8 @@ a mail proxy server.
 
 %prep
 tar -zxf %{_sourcedir}/nginx-%{main_version}.tar.gz -C %{_sourcedir}
-find /builddir/build
-tar -zxf %{_sourcedir}/%{name}-%{version}/openssl-1.1.0e.tar.gz -C %{_builddir}
+find %{_sourcedir}
+tar -zxf %{_sourcedir}/openssl-1.1.0e.tar.gz -C %{_builddir}
 
 %setup
 tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
