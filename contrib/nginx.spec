@@ -102,8 +102,6 @@ find %{_sourcedir}
 tar -zxf %{_sourcedir}/openssl-1.1.0e.tar.gz -C %{_builddir}
 
 %setup
-tar --strip-components=1 -zxf %{_sourcedir}/%{name}-%{version}/nginx-%{main_version}.tar.gz
-
 
 cp %{SOURCE2} .
 sed -e 's|%%DEFAULTSTART%%|2 3 4 5|g' -e 's|%%DEFAULTSTOP%%|0 1 6|g' \

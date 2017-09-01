@@ -46,12 +46,13 @@ find \%{_sourcedir}\n\
 tar -zxf \%{_sourcedir}/$OPENSSL.tar.gz -C \%{_builddir}\n\
 |" $PRJDIR/contrib/*.spec
 
-sed -i "s|^\%setup -q$|\%setup\n\
-tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
-|" $PRJDIR/contrib/*.spec
+sed -i "s|^\%setup -q$|\%setup\n|" $PRJDIR/contrib/*.spec
+#sed -i "s|^\%setup -q$|\%setup\n\
+#tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
+#|" $PRJDIR/contrib/*.spec
 
-sed -i "s|^tar --strip-components=1.*|tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
-|" $PRJDIR/contrib/*.spec
+#sed -i "s|^tar --strip-components=1.*|tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
+#|" $PRJDIR/contrib/*.spec
 
 
 sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=\%{_builddir}/$OPENSSL|g" $PRJDIR/contrib/*.spec
