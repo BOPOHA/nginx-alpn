@@ -78,7 +78,7 @@ Source10: nginx.suse.logrotate
 Source11: nginx-debug.service
 Source12: COPYRIGHT
 Source13: nginx.check-reload.sh
-
+Source13: openssl-1.1.0e.tar.gz 
 License: 2-clause BSD-like license
 
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
