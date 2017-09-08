@@ -23,16 +23,17 @@ BuildRequires: libopenssl-devel
 %if 0%{?rhel} == 7
 %define epoch 1
 Epoch: %{epoch}
+%define dist .el7
 %endif
 
-%define main_version 1.13.4
+%define main_version 1.13.5
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx Perl dynamic module
 Name: nginx-module-perl
-Version: 1.13.4
+Version: 1.13.5
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -49,7 +50,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.13.4-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.13.5-1%{?dist}.ngx
 
 %description
 nginx Perl dynamic module.
@@ -139,6 +140,9 @@ BANNER
 fi
 
 %changelog
+* Tue Sep  5 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.13.5
+
 * Tue Aug  8 2017 Sergey Budnevitch <sb@nginx.com>
 - base version updated to 1.13.4
 

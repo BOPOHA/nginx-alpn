@@ -34,6 +34,7 @@ Requires: systemd
 Requires: openssl >= 1.0.1
 BuildRequires: systemd
 BuildRequires: openssl-devel >= 1.0.1
+%define dist .el7
 %endif
 
 %if 0%{?suse_version} == 1315
@@ -47,7 +48,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.13.4
+%define main_version 1.13.5
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -318,6 +319,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Sep  5 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.5
+
 * Tue Aug  8 2017 Sergey Budnevitch <sb@nginx.com>
 - 1.13.4
 

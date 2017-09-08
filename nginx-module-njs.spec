@@ -2,7 +2,7 @@
 %define nginx_user nginx
 %define nginx_group nginx
 
-
+BuildRequires: libedit-devel
 
 %if 0%{?rhel} || 0%{?amzn}
 %define _group System Environment/Daemons
@@ -17,16 +17,17 @@ BuildRequires: libopenssl-devel
 %if 0%{?rhel} == 7
 %define epoch 1
 Epoch: %{epoch}
+%define dist .el7
 %endif
 
-%define main_version 1.13.4
+%define main_version 1.13.5
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx nginScript dynamic modules
 Name: nginx-module-njs
-Version: 1.13.4.0.1.12
+Version: 1.13.5.0.1.13
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -35,7 +36,7 @@ Group: %{_group}
 Source0: http://nginx.org/download/nginx-%{main_version}.tar.gz
 Source1: COPYRIGHT
 
-Source100: njs-0.1.12.tar.gz
+Source100: njs-0.1.13.tar.gz
 
 
 
@@ -44,7 +45,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.13.4-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.13.5-1%{?dist}.ngx
 
 %description
 nginx nginScript dynamic modules.
@@ -57,7 +58,7 @@ nginx nginScript dynamic modules.
 %define WITH_LD_OPT -Wl,-z,relro -Wl,-z,now
 
 %define BASE_CONFIGURE_ARGS $(echo "--prefix=%{_sysconfdir}/nginx --sbin-path=%{_sbindir}/nginx --modules-path=%{_libdir}/nginx/modules --conf-path=%{_sysconfdir}/nginx/nginx.conf --error-log-path=%{_localstatedir}/log/nginx/error.log --http-log-path=%{_localstatedir}/log/nginx/access.log --pid-path=%{_localstatedir}/run/nginx.pid --lock-path=%{_localstatedir}/run/nginx.lock --http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp --http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp --http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp --user=%{nginx_user} --group=%{nginx_group} --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module")
-%define MODULE_CONFIGURE_ARGS $(echo "--add-dynamic-module=njs-0.1.12/nginx")
+%define MODULE_CONFIGURE_ARGS $(echo "--add-dynamic-module=njs-0.1.13/nginx")
 
 %prep
 %setup -qcTn %{name}-%{main_version}
@@ -67,7 +68,7 @@ tar zxf %{SOURCE100}
 
 
 %build
-
+cd %{bdir}/njs-0.1.13 && ./configure && make njs
 cd %{bdir}
 ./configure %{BASE_CONFIGURE_ARGS} %{MODULE_CONFIGURE_ARGS} \
 	--with-cc-opt="%{WITH_CC_OPT}" \
@@ -90,7 +91,9 @@ cd %{bdir}
 %{__install} -m 644 -p %{SOURCE1} \
     $RPM_BUILD_ROOT%{_datadir}/doc/nginx-module-njs/
 
-
+%{__install} -m644 %{bdir}/njs-0.1.13/CHANGES $RPM_BUILD_ROOT%{_datadir}/doc/nginx-module-njs/
+%{__mkdir} -p $RPM_BUILD_ROOT%{_bindir}
+%{__install} -m755 %{bdir}/njs-0.1.13/build/njs $RPM_BUILD_ROOT%{_bindir}/
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_libdir}/nginx/modules
 for so in `find %{bdir}/objs/ -maxdepth 1 -type f -name "*.so"`; do
@@ -106,7 +109,7 @@ done
 %{_libdir}/nginx/modules/*
 %dir %{_datadir}/doc/nginx-module-njs
 %{_datadir}/doc/nginx-module-njs/*
-
+%{_bindir}/njs
 
 %post
 if [ $1 -eq 1 ]; then
@@ -130,6 +133,9 @@ BANNER
 fi
 
 %changelog
+* Mon Sep  4 2017 Konstantin Pavlov <thresh@nginx.com>
+- njs module updated to 0.1.13
+
 * Tue Aug  8 2017 Sergey Budnevitch <sb@nginx.com>
 - njs module updated to 0.1.12
 
