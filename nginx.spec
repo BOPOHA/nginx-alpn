@@ -7,15 +7,6 @@
 # distribution specific definitions
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (0%{?suse_version} == 1315)
 
-%if 0%{?rhel} == 5
-%define _group System Environment/Daemons
-Requires(pre): shadow-utils
-Requires: initscripts >= 8.36
-Requires(post): chkconfig
-Requires: openssl
-BuildRequires: openssl-devel
-%endif
-
 %if 0%{?rhel} == 6
 %define _group System Environment/Daemons
 Requires(pre): shadow-utils
@@ -26,15 +17,23 @@ BuildRequires: openssl-devel >= 1.0.1
 %endif
 
 %if 0%{?rhel} == 7
+BuildRequires: redhat-lsb-core
 %define _group System Environment/Daemons
 %define epoch 1
 Epoch: %{epoch}
 Requires(pre): shadow-utils
 Requires: systemd
-Requires: openssl >= 1.0.1
 BuildRequires: systemd
+%define os_minor %(lsb_release -rs | cut -d '.' -f 2)
+%if %{os_minor} >= 4
+Requires: openssl >= 1.0.2
+BuildRequires: openssl-devel >= 1.0.2
+%define dist .el7_4
+%else
+Requires: openssl >= 1.0.1
 BuildRequires: openssl-devel >= 1.0.1
 %define dist .el7
+%endif
 %endif
 
 %if 0%{?suse_version} == 1315
@@ -48,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.13.5
+%define main_version 1.13.8
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -313,6 +312,15 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Dec 26 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.8
+
+* Tue Nov 21 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.7
+
+* Tue Oct 10 2017 Konstantin Pavlov <thresh@nginx.com>
+- 1.13.6
+
 * Tue Sep  5 2017 Konstantin Pavlov <thresh@nginx.com>
 - 1.13.5
 

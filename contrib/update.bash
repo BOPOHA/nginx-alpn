@@ -1,18 +1,19 @@
 #!/bin/bash
 set -e
 OPENSSL='openssl-1.1.0e'
-NGINXVER='1.13.5'
+NGINXVER='1.13.8'
 NGINXREL='1'
-NJSVER='0.1.13'
+NJSVER='0.1.15'
+REPO='el7_4'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
 REPOURL="https://nginx.org/packages/mainline/centos/7/SRPMS"
-RPMLIST="nginx-$NGINXVER-$NGINXREL.el7.ngx.src.rpm
-nginx-module-njs-$NGINXVER.$NJSVER-$NGINXREL.el7.ngx.src.rpm
-nginx-module-geoip-$NGINXVER-$NGINXREL.el7.ngx.src.rpm
-nginx-module-perl-$NGINXVER-$NGINXREL.el7.ngx.src.rpm
-nginx-module-image-filter-$NGINXVER-$NGINXREL.el7.ngx.src.rpm
-nginx-module-xslt-$NGINXVER-$NGINXREL.el7.ngx.src.rpm"
+RPMLIST="nginx-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
+nginx-module-njs-$NGINXVER.$NJSVER-$NGINXREL.$REPO.ngx.src.rpm
+nginx-module-geoip-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
+nginx-module-perl-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
+nginx-module-image-filter-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
+nginx-module-xslt-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm"
 
 TMPDIR='/tmp'
 PRJDIR="$PWD"
@@ -45,6 +46,11 @@ tar -zxf \%{_sourcedir}/nginx-\%{main_version}.tar.gz -C \%{_sourcedir}\n\
 find \%{_sourcedir}\n\
 tar -zxf \%{_sourcedir}/$OPENSSL.tar.gz -C \%{_builddir}\n\
 |" $PRJDIR/contrib/*.spec
+# replace lsb_release with sed
+sed -i 's|^\%define os_minor.*$|\%define os_minor 4|' contrib/*.spec
+# lsb_release -rs | cut -d '.' -f 2
+# sed "s#^.*release .\.\([0-9]*\)\..*#\1#" /etc/redhat-release
+# 4
 
 sed -i "s|^\%setup -q$|\%setup\n|" $PRJDIR/contrib/*.spec
 #sed -i "s|^\%setup -q$|\%setup\n\

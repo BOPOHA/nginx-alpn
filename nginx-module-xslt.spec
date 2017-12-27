@@ -2,9 +2,6 @@
 %define nginx_user nginx
 %define nginx_group nginx
 
-BuildRequires: libxslt-devel
-Requires: libxslt
-
 %if 0%{?rhel} || 0%{?amzn}
 %define _group System Environment/Daemons
 BuildRequires: openssl-devel
@@ -16,19 +13,28 @@ BuildRequires: libopenssl-devel
 %endif
 
 %if 0%{?rhel} == 7
+BuildRequires: redhat-lsb-core
 %define epoch 1
 Epoch: %{epoch}
+%define os_minor %(lsb_release -rs | cut -d '.' -f 2)
+%if %{os_minor} >= 4
+%define dist .el7_4
+%else
 %define dist .el7
 %endif
+%endif
 
-%define main_version 1.13.5
+BuildRequires: libxslt-devel
+Requires: libxslt
+
+%define main_version 1.13.8
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx xslt dynamic module
 Name: nginx-module-xslt
-Version: 1.13.5
+Version: 1.13.8
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -45,7 +51,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.13.5-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.13.8-1%{?dist}.ngx
 
 %description
 nginx xslt dynamic module.
@@ -127,6 +133,15 @@ BANNER
 fi
 
 %changelog
+* Tue Dec 26 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.13.8
+
+* Tue Nov 21 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.13.7
+
+* Tue Oct 10 2017 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.13.6
+
 * Tue Sep  5 2017 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.13.5
 
