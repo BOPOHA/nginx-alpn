@@ -40,7 +40,7 @@ done
 cp -a $PRJDIR/*.spec $PRJDIR/contrib/
 
 sed -i "s#^\%if 0\%{?rhel} == 7#\%if ( 0\%{\?rhel} == 7 ) || ( 0\%{?fedora} >= 18 )#" $PRJDIR/contrib/*.spec
-sed -i "s#^Source0:#Source90: openssl-1.1.0e.tar.gz\nSource0:#" $PRJDIR/contrib/*.spec
+sed -i "s#^Source0:#Source90: openssl-1.1.0g.tar.gz\nSource0:#" $PRJDIR/contrib/*.spec
 sed -i "s|^\%prep|\%prep\n\
 tar -zxf \%{_sourcedir}/nginx-\%{main_version}.tar.gz -C \%{_sourcedir}\n\
 find \%{_sourcedir}\n\
