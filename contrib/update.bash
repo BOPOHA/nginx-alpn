@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 OPENSSL='openssl-1.1.0g'
-NGINXVER='1.13.8'
+NGINXVER='1.13.9'
 NGINXREL='1'
 NJSVER='0.1.15'
 REPO='el7_4'
