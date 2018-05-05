@@ -35,7 +35,7 @@ Requires: gd
 Summary: nginx image filter dynamic module
 Name: nginx-module-image-filter
 Version: 1.13.12
-Release: 1%{?dist}.ngx
+Release: 2%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}

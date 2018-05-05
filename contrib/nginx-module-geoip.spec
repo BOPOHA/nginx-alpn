@@ -40,7 +40,7 @@ Requires: GeoIP
 Summary: nginx GeoIP dynamic modules
 Name: nginx-module-geoip
 Version: 1.13.12
-Release: 1%{?dist}.ngx
+Release: 2%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}

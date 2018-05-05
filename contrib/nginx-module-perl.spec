@@ -40,7 +40,7 @@ Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Summary: nginx Perl dynamic module
 Name: nginx-module-perl
 Version: 1.13.12
-Release: 1%{?dist}.ngx
+Release: 2%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}

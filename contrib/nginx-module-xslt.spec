@@ -35,7 +35,7 @@ Requires: libxslt
 Summary: nginx xslt dynamic module
 Name: nginx-module-xslt
 Version: 1.13.12
-Release: 1%{?dist}.ngx
+Release: 2%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}
