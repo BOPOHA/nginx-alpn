@@ -28,14 +28,14 @@ BuildRequires: libxslt-devel
 Requires: libxslt
 
 %define main_version 1.13.12
-%define main_release 2%{?dist}.ngx
+%define main_release 3%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx xslt dynamic module
 Name: nginx-module-xslt
 Version: 1.13.12
-Release: 2%{?dist}.ngx
+Release: 3%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}
@@ -52,7 +52,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.13.12-2%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.13.12-3%{?dist}.ngx
 
 %description
 nginx xslt dynamic module.
