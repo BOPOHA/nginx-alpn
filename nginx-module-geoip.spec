@@ -32,14 +32,14 @@ BuildRequires: GeoIP-devel
 Requires: GeoIP
 %endif
 
-%define main_version 1.13.12
+%define main_version 1.14.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx GeoIP dynamic modules
 Name: nginx-module-geoip
-Version: 1.13.12
+Version: 1.14.0
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -56,7 +56,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.13.12-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.14.0-1%{?dist}.ngx
 
 %description
 nginx GeoIP dynamic modules.
@@ -140,6 +140,9 @@ BANNER
 fi
 
 %changelog
+* Tue Apr 17 2018 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.14.0
+
 * Mon Apr 09 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.13.12
 

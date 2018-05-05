@@ -1,13 +1,21 @@
 #!/bin/bash
 set -e
 OPENSSL='openssl-1.1.1-pre2'
-NGINXVER='1.13.12'
+NGINXVER='1.14.0'
 NGINXREL='1'
 NJSVER='0.2.0'
 REPO='el7_4'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
-REPOURL="https://nginx.org/packages/mainline/centos/7/SRPMS"
+IFS='.' NGVERARR=($NGINXVER)
+unset IFS
+if [ $((NGVERARR[1]%2)) -ne 0 ] ; then
+       REPOURL="https://nginx.org/packages/mainline/centos/7/SRPMS"
+else
+       REPOURL="https://nginx.org/packages/centos/7/SRPMS"
+fi
+echo $REPOURL
+
 RPMLIST="nginx-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
 nginx-module-njs-$NGINXVER.$NJSVER-$NGINXREL.$REPO.ngx.src.rpm
 nginx-module-geoip-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
@@ -40,6 +48,11 @@ done
 cp -a $PRJDIR/*.spec $PRJDIR/contrib/
 
 sed -i "s#^\%if 0\%{?rhel} == 7#\%if ( 0\%{\?rhel} == 7 ) || ( 0\%{?fedora} >= 18 )#" $PRJDIR/contrib/*.spec
+sed -i "s#^Version: .*#Version: \%{main_version}#"                                    $PRJDIR/contrib/*.spec
+sed -i "s#^Release: .*#Release: \%{main_release}#"                                    $PRJDIR/contrib/*.spec
+
+sed -i "s#^Requires: nginx == .*#Requires: nginx == \%{?epoch:\%{epoch}:}\%{main_version}-\%{main_release}#" $PRJDIR/contrib/*.spec
+
 sed -i "s#^Source0:#Source90: $OPENSSL.tar.gz\nSource0:#" $PRJDIR/contrib/*.spec
 sed -i "s|^\%prep|\%prep\n\
 tar -zxf \%{_sourcedir}/nginx-\%{main_version}.tar.gz -C \%{_sourcedir}\n\
