@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 OPENSSL='openssl-1.1.1-pre2'
-NGINXVER='1.14.0'
+NGINXVER='1.15.0'
 NGINXREL='1'
-NJSVER='0.2.0'
+NJSVER='0.2.1'
 REPO='el7_4'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
