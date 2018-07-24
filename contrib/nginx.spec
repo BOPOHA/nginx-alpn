@@ -47,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.15.0
+%define main_version 1.15.1
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -318,6 +318,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Jul 03 2018 Konstantin Pavlov <thresh@nginx.com>
+- 1.15.1
+
 * Tue Jun 05 2018 Konstantin Pavlov <thresh@nginx.com>
 - 1.15.0
 
@@ -423,7 +426,7 @@ fi
 
 * Tue Mar 29 2016 Konstantin Pavlov <thresh@nginx.com>
 - 1.9.13
-- Added perl and nJScript dynamic modules
+- Added perl and njs dynamic modules
 - Fixed Requires section for dynamic modules on CentOS7/RHEL7
 
 * Wed Feb 24 2016 Sergey Budnevitch <sb@nginx.com>
