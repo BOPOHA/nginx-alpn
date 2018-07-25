@@ -7,7 +7,7 @@ Yum repository for nginx with ALPN on EL7/6.
 
 Nginx with proper HTTP/2 (ALPN) support for CentOS 6 and Centos 7.
 
-Builded with OpenSSL 1.1.1-pre2 (TLS 1.3 support, draft 23, https://dev.ssllabs.com/ssltest/analyze.html)
+Builded with OpenSSL 1.1.1-pre4 (TLS 1.3 support, draft 28, https://dev.ssllabs.com/ssltest/analyze.html)
 
 The original files were patched this script: https://github.com/BOPOHA/nginx-alpn/blob/master/contrib/update.bash
 

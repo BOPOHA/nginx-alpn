@@ -27,14 +27,14 @@ Epoch: %{epoch}
 BuildRequires: gd-devel
 Requires: gd
 
-%define main_version 1.15.1
+%define main_version 1.15.2
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx image filter dynamic module
 Name: nginx-module-image-filter
-Version: 1.15.1
+Version: 1.15.2
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -51,7 +51,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.15.1-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.15.2-1%{?dist}.ngx
 
 %description
 nginx image filter dynamic module.
@@ -133,6 +133,9 @@ BANNER
 fi
 
 %changelog
+* Tue Jul 24 2018 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.2
+
 * Tue Jul 03 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.1
 
