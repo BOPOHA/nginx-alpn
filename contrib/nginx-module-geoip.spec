@@ -32,8 +32,8 @@ BuildRequires: GeoIP-devel
 Requires: GeoIP
 %endif
 
-%define main_version 1.15.2
-%define main_release 2%{?dist}.ngx
+%define main_version 1.15.3
+%define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
@@ -145,6 +145,9 @@ BANNER
 fi
 
 %changelog
+* Tue Aug 28 2018 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.3
+
 * Tue Jul 24 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.2
 
