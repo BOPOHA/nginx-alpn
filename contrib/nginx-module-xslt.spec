@@ -7,7 +7,7 @@
 BuildRequires: openssl-devel
 %endif
 
-%if 0%{?suse_version} == 1315
+%if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 BuildRequires: libopenssl-devel
 %endif
@@ -27,7 +27,7 @@ Epoch: %{epoch}
 BuildRequires: libxslt-devel
 Requires: libxslt
 
-%define main_version 1.15.3
+%define main_version 1.15.4
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -138,6 +138,9 @@ BANNER
 fi
 
 %changelog
+* Tue Sep 25 2018 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.4
+
 * Tue Aug 28 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.3
 

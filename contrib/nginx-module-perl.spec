@@ -7,7 +7,7 @@
 BuildRequires: openssl-devel
 %endif
 
-%if 0%{?suse_version} == 1315
+%if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 BuildRequires: libopenssl-devel
 %endif
@@ -24,7 +24,7 @@ Epoch: %{epoch}
 %endif
 %endif
 
-%if (0%{?suse_version} == 1315)
+%if 0%{?suse_version} >= 1315
 BuildRequires: perl
 %else
 BuildRequires: perl-devel
@@ -32,7 +32,7 @@ BuildRequires: perl-ExtUtils-Embed
 %endif
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-%define main_version 1.15.3
+%define main_version 1.15.4
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -151,6 +151,9 @@ BANNER
 fi
 
 %changelog
+* Tue Sep 25 2018 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.4
+
 * Tue Aug 28 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.3
 

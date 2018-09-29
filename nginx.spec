@@ -5,7 +5,7 @@
 %define nginx_loggroup adm
 
 # distribution specific definitions
-%define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (0%{?suse_version} == 1315)
+%define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (0%{?suse_version} >= 1315)
 
 %if 0%{?rhel} == 6
 %define _group System Environment/Daemons
@@ -36,7 +36,7 @@ BuildRequires: openssl-devel >= 1.0.1
 %endif
 %endif
 
-%if 0%{?suse_version} == 1315
+%if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 %define nginx_loggroup trusted
 Requires(pre): shadow
@@ -47,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.15.3
+%define main_version 1.15.4
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -91,7 +91,7 @@ Provides: webserver
 nginx [engine x] is an HTTP and reverse proxy server, as well as
 a mail proxy server.
 
-%if 0%{?suse_version} == 1315
+%if 0%{?suse_version} >= 1315
 %debug_package
 %endif
 
@@ -312,6 +312,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Sep 25 2018 Konstantin Pavlov <thresh@nginx.com>
+- 1.15.4
+
 * Tue Aug 28 2018 Konstantin Pavlov <thresh@nginx.com>
 - 1.15.3
 
