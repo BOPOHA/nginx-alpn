@@ -32,14 +32,14 @@ BuildRequires: perl-ExtUtils-Embed
 %endif
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-%define main_version 1.15.4
+%define main_version 1.15.5
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx Perl dynamic module
 Name: nginx-module-perl
-Version: 1.15.4
+Version: 1.15.5
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -56,7 +56,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.15.4-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.15.5-1%{?dist}.ngx
 
 %description
 nginx Perl dynamic module.
@@ -146,6 +146,9 @@ BANNER
 fi
 
 %changelog
+* Tue Oct 02 2018 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.5
+
 * Tue Sep 25 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.4
 
