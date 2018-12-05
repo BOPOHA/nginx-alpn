@@ -47,7 +47,7 @@ BuildRequires: systemd
 
 # end of distribution specific definitions
 
-%define main_version 1.15.6
+%define main_version 1.15.7
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -318,6 +318,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Nov 27 2018 Konstantin Pavlov <thresh@nginx.com>
+- 1.15.7
+
 * Tue Nov 06 2018 Konstantin Pavlov <thresh@nginx.com>
 - 1.15.6
 - Fixes CVE-2018-16843
