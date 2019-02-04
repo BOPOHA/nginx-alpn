@@ -45,7 +45,8 @@ Source90: https://www.openssl.org/source/openssl-1.1.1.tar.gz
 Source0: https://nginx.org/download/nginx-%{main_version}.tar.gz
 Source1: COPYRIGHT
 
-Source100: https://github.com/SpiderLabs/ModSecurity/releases/download/v%{ngmod_version}/%{ngmod_name}-%{ngmod_version}.tar.gz
+# Source100: https://github.com/SpiderLabs/ModSecurity/releases/download/v%{ngmod_version}/%{ngmod_name}-%{ngmod_version}.tar.gz
+Source100: https://github.com/SpiderLabs/ModSecurity-nginx/archive/master.zip
 
 
 
@@ -70,14 +71,12 @@ nginx %{ngmod_name} dynamic modules.
 %define MODULE_CONFIGURE_ARGS $(echo "--add-dynamic-module=%{ngmod_name}-%{ngmod_version}/nginx")
 
 %prep
-tar -zxf %{_sourcedir}/nginx-%{main_version}.tar.gz -C %{_sourcedir}
 find %{_sourcedir}
-tar -zxf %{_sourcedir}/openssl-1.1.1.tar.gz -C %{_builddir}
+tar -zxf %{SOURCE90} -C %{_builddir}
+
 
 %setup -qcTn %{name}-%{main_version}
-tar --strip-components=1 -zxf %{SOURCE0}
-
-tar zxf %{SOURCE100}
+tar --strip-components=1 -xvf %{SOURCE100} -C $RPM_BUILD_ROOT%{_sysconfdir}/nginx/modules/
 
 
 %build
