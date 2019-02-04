@@ -81,7 +81,7 @@ find %{_builddir}
 
 
 %build
-%configure %{BASE_CONFIGURE_ARGS} %{MODULE_CONFIGURE_ARGS} \
+./configure %{BASE_CONFIGURE_ARGS} %{MODULE_CONFIGURE_ARGS} \
 	--with-cc-opt="%{WITH_CC_OPT}" \
 	--with-ld-opt="%{WITH_LD_OPT}" \
 	--with-debug
