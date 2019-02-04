@@ -77,13 +77,11 @@ mkdir %{_builddir}/%{ngmod_name}-%{ngmod_version}
 tar --strip-components=1 -xvf %{SOURCE100} -C %{_builddir}/%{ngmod_name}-%{ngmod_version}
 find %{_builddir}
 
-%setup -qcn nginx-%{main_version}
+%setup -qn nginx-%{main_version}
 
 
 %build
-cd %{bdir}/%{ngmod_name}-%{ngmod_version} && ./configure && make modsecurity
-cd %{bdir}
-./configure %{BASE_CONFIGURE_ARGS} %{MODULE_CONFIGURE_ARGS} \
+%configure %{BASE_CONFIGURE_ARGS} %{MODULE_CONFIGURE_ARGS} \
 	--with-cc-opt="%{WITH_CC_OPT}" \
 	--with-ld-opt="%{WITH_LD_OPT}" \
 	--with-debug
