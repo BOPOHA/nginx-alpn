@@ -46,7 +46,7 @@ Source0: https://nginx.org/download/nginx-%{main_version}.tar.gz
 Source1: COPYRIGHT
 
 # Source100: https://github.com/SpiderLabs/ModSecurity/releases/download/v%{ngmod_version}/%{ngmod_name}-%{ngmod_version}.tar.gz
-Source100: https://github.com/SpiderLabs/ModSecurity-nginx/archive/master.zip
+Source100: https://github.com/SpiderLabs/ModSecurity-nginx/archive/master.tar.gz
 
 
 
