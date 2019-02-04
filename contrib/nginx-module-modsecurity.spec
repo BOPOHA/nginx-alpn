@@ -77,7 +77,7 @@ mkdir %{_builddir}/%{ngmod_name}-%{ngmod_version}
 tar --strip-components=1 -xvf %{SOURCE100} -C %{_builddir}/%{ngmod_name}-%{ngmod_version}
 find %{_builddir}
 
-%setup
+%setup -qcTn nginx-%{main_version}
 
 
 %build
