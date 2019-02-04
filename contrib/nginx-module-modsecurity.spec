@@ -75,9 +75,9 @@ find %{_sourcedir}
 tar -zxf %{SOURCE90} -C %{_builddir}
 mkdir %{_builddir}/%{ngmod_name}-%{ngmod_version}
 tar --strip-components=1 -xvf %{SOURCE100} -C %{_builddir}/%{ngmod_name}-%{ngmod_version}
-find %{_sourcedir}
+find %{_builddir}
 
-%setup -qcTn %{name}-%{main_version}
+%setup
 
 
 %build
