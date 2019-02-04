@@ -41,8 +41,8 @@ Vendor: Nginx, Inc.
 URL: http://nginx.org/
 Group: %{_group}
 
-Source90: openssl-1.1.1.tar.gz
-Source0: http://nginx.org/download/nginx-%{main_version}.tar.gz
+Source90: https://www.openssl.org/source/openssl-1.1.1.tar.gz
+Source0: https://nginx.org/download/nginx-%{main_version}.tar.gz
 Source1: COPYRIGHT
 
 Source100: https://github.com/SpiderLabs/ModSecurity/releases/download/v%{ngmod_version}/%{ngmod_name}-%{ngmod_version}.tar.gz
