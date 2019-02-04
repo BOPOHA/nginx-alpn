@@ -25,6 +25,7 @@ Epoch: %{epoch}
 %endif
 
 BuildRequires: libedit-devel
+BuildRequires: libmodsecurity
 
 %define main_version 1.15.8
 %define main_release 1%{?dist}.ngx
