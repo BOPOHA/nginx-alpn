@@ -32,7 +32,7 @@ BuildRequires: perl-ExtUtils-Embed
 %endif
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-%define main_version 1.15.8
+%define main_version 1.15.9
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -151,6 +151,9 @@ BANNER
 fi
 
 %changelog
+* Tue Feb 26 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.9
+
 * Tue Dec 25 2018 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.8
 
