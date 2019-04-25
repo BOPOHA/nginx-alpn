@@ -13,15 +13,9 @@ BuildRequires: libopenssl-devel
 %endif
 
 %if ( 0%{?rhel} == 7 ) || ( 0%{?fedora} >= 18 )
-BuildRequires: redhat-lsb-core
 %define epoch 1
 Epoch: %{epoch}
-%define os_minor 4
-%if %{os_minor} >= 4
-%define dist .el7_4
-%else
 %define dist .el7
-%endif
 %endif
 
 %if 0%{?suse_version} >= 1315
@@ -32,7 +26,7 @@ BuildRequires: perl-ExtUtils-Embed
 %endif
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-%define main_version 1.15.9
+%define main_version 1.16.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -151,6 +145,18 @@ BANNER
 fi
 
 %changelog
+* Tue Apr 23 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.16.0
+
+* Tue Apr 16 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.12
+
+* Tue Apr 09 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.11
+
+* Tue Mar 26 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.10
+
 * Tue Feb 26 2019 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.9
 

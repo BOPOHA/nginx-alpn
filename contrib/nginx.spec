@@ -5,7 +5,14 @@
 %define nginx_loggroup adm
 
 # distribution specific definitions
-%define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (0%{?suse_version} >= 1315)
+%define use_systemd (0%{?rhel} >= 7 || 0%{?fedora} >= 19 || 0%{?suse_version} >= 1315 || 0%{?amzn} >= 2)
+
+%if %{use_systemd}
+BuildRequires: systemd
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
+%endif
 
 %if 0%{?rhel} == 6
 %define _group System Environment/Daemons
@@ -17,37 +24,25 @@ BuildRequires: openssl-devel >= 1.0.1
 %endif
 
 %if ( 0%{?rhel} == 7 ) || ( 0%{?fedora} >= 18 )
-BuildRequires: redhat-lsb-core
 %define _group System Environment/Daemons
 %define epoch 1
 Epoch: %{epoch}
 Requires(pre): shadow-utils
-Requires: systemd
-BuildRequires: systemd
-%define os_minor 4
-%if %{os_minor} >= 4
 Requires: openssl >= 1.0.2
 BuildRequires: openssl-devel >= 1.0.2
-%define dist .el7_4
-%else
-Requires: openssl >= 1.0.1
-BuildRequires: openssl-devel >= 1.0.1
 %define dist .el7
-%endif
 %endif
 
 %if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 %define nginx_loggroup trusted
 Requires(pre): shadow
-Requires: systemd
 BuildRequires: libopenssl-devel
-BuildRequires: systemd
 %endif
 
 # end of distribution specific definitions
 
-%define main_version 1.15.9
+%define main_version 1.16.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -318,6 +313,18 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Apr 23 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.16.0
+
+* Tue Apr 16 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.15.12
+
+* Tue Apr 09 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.15.11
+
+* Tue Mar 26 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.15.10
+
 * Tue Feb 26 2019 Konstantin Pavlov <thresh@nginx.com>
 - 1.15.9
 

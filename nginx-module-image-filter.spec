@@ -13,28 +13,22 @@ BuildRequires: libopenssl-devel
 %endif
 
 %if 0%{?rhel} == 7
-BuildRequires: redhat-lsb-core
 %define epoch 1
 Epoch: %{epoch}
-%define os_minor %(lsb_release -rs | cut -d '.' -f 2)
-%if %{os_minor} >= 4
-%define dist .el7_4
-%else
 %define dist .el7
-%endif
 %endif
 
 BuildRequires: gd-devel
 Requires: gd
 
-%define main_version 1.15.9
+%define main_version 1.16.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx image filter dynamic module
 Name: nginx-module-image-filter
-Version: 1.15.9
+Version: 1.16.0
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -51,7 +45,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.15.9-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.16.0-1%{?dist}.ngx
 
 %description
 nginx image filter dynamic module.
@@ -133,6 +127,18 @@ BANNER
 fi
 
 %changelog
+* Tue Apr 23 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.16.0
+
+* Tue Apr 16 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.12
+
+* Tue Apr 09 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.11
+
+* Tue Mar 26 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.15.10
+
 * Tue Feb 26 2019 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.9
 
