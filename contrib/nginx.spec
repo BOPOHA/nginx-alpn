@@ -14,8 +14,11 @@ Requires(preun): systemd
 Requires(postun): systemd
 %endif
 
-%if 0%{?rhel} == 6
+%if 0%{?rhel}
 %define _group System Environment/Daemons
+%endif
+
+%if 0%{?rhel} == 6
 Requires(pre): shadow-utils
 Requires: initscripts >= 8.36
 Requires(post): chkconfig
@@ -24,7 +27,6 @@ BuildRequires: openssl-devel >= 1.0.1
 %endif
 
 %if ( 0%{?rhel} == 7 ) || ( 0%{?fedora} >= 18 )
-%define _group System Environment/Daemons
 %define epoch 1
 Epoch: %{epoch}
 Requires(pre): shadow-utils
@@ -33,16 +35,25 @@ BuildRequires: openssl-devel >= 1.0.2
 %define dist .el7
 %endif
 
+%if 0%{?rhel} == 8
+%define epoch 1
+Epoch: %{epoch}
+Requires(pre): shadow-utils
+BuildRequires: openssl-devel >= 1.1.1
+%define _debugsource_template %{nil}
+%endif
+
 %if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 %define nginx_loggroup trusted
 Requires(pre): shadow
 BuildRequires: libopenssl-devel
+%define _debugsource_template %{nil}
 %endif
 
 # end of distribution specific definitions
 
-%define main_version 1.16.0
+%define main_version 1.17.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -187,6 +198,15 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
 %{__install} -m755 %{bdir}/objs/nginx-debug \
     $RPM_BUILD_ROOT%{_sbindir}/nginx-debug
 
+%check
+%{__rm} -rf $RPM_BUILD_ROOT/usr/src
+cd %{bdir}
+grep -v 'usr/src' debugfiles.list > debugfiles.list.new && mv debugfiles.list.new debugfiles.list
+cat /dev/null > debugsources.list
+%if 0%{?suse_version} >= 1500
+cat /dev/null > debugsourcefiles.list
+%endif
+
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
@@ -313,8 +333,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
-* Tue Apr 23 2019 Konstantin Pavlov <thresh@nginx.com>
-- 1.16.0
+* Tue May 21 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.17.0
 
 * Tue Apr 16 2019 Konstantin Pavlov <thresh@nginx.com>
 - 1.15.12

@@ -10,12 +10,19 @@ BuildRequires: openssl-devel
 %if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 BuildRequires: libopenssl-devel
+%define _debugsource_template %{nil}
 %endif
 
 %if 0%{?rhel} == 7
 %define epoch 1
 Epoch: %{epoch}
 %define dist .el7
+%endif
+
+%if 0%{?rhel} == 8
+%define epoch 1
+Epoch: %{epoch}
+%define _debugsource_template %{nil}
 %endif
 
 %if 0%{?suse_version} >= 1315
@@ -26,14 +33,14 @@ BuildRequires: perl-ExtUtils-Embed
 %endif
 Requires: perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-%define main_version 1.16.0
+%define main_version 1.17.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
 Summary: nginx Perl dynamic module
 Name: nginx-module-perl
-Version: 1.16.0
+Version: 1.17.0
 Release: 1%{?dist}.ngx
 Vendor: Nginx, Inc.
 URL: http://nginx.org/
@@ -50,7 +57,7 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{main_version}-%{main_release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
-Requires: nginx == %{?epoch:%{epoch}:}1.16.0-1%{?dist}.ngx
+Requires: nginx == %{?epoch:%{epoch}:}1.17.0-1%{?dist}.ngx
 
 %description
 nginx Perl dynamic module.
@@ -107,6 +114,15 @@ for so in `find %{bdir}/objs/ -maxdepth 1 -type f -name "*.so"`; do
    $RPM_BUILD_ROOT%{_libdir}/nginx/modules/
 done
 
+%check
+%{__rm} -rf $RPM_BUILD_ROOT/usr/src
+cd %{bdir}
+grep -v 'usr/src' debugfiles.list > debugfiles.list.new && mv debugfiles.list.new debugfiles.list
+cat /dev/null > debugsources.list
+%if 0%{?suse_version} >= 1500
+cat /dev/null > debugsourcefiles.list
+%endif
+
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
@@ -140,8 +156,8 @@ BANNER
 fi
 
 %changelog
-* Tue Apr 23 2019 Konstantin Pavlov <thresh@nginx.com>
-- base version updated to 1.16.0
+* Tue May 21 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.17.0
 
 * Tue Apr 16 2019 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.15.12
