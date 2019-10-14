@@ -53,7 +53,7 @@ BuildRequires: libopenssl-devel
 
 # end of distribution specific definitions
 
-%define main_version 1.17.1
+%define main_version 1.17.4
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -327,6 +327,15 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Sep 24 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.17.4
+
+* Tue Aug 13 2019 Andrei Belov <defan@nginx.com>
+- 1.17.3
+
+* Tue Jul 23 2019 Konstantin Pavlov <thresh@nginx.com>
+- 1.17.2
+
 * Tue Jun 25 2019 Andrei Belov <defan@nginx.com>
 - 1.17.1
 

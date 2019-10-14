@@ -3,9 +3,9 @@ set -e
 set -u
 
 OPENSSL='openssl-1.1.1c'
-NGINXVER='1.17.1'
+NGINXVER='1.17.4'
 NGINXREL='1'
-NJSVER='0.3.3'
+NJSVER='0.3.5'
 REPO='el7'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
