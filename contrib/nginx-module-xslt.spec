@@ -28,7 +28,7 @@ Epoch: %{epoch}
 BuildRequires: libxslt-devel
 Requires: libxslt
 
-%define main_version 1.17.4
+%define main_version 1.17.6
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -148,6 +148,12 @@ BANNER
 fi
 
 %changelog
+* Tue Nov 19 2019 Konstantin Pavlov <thresh@nginx.com>
+- base version updated to 1.17.6
+
+* Tue Oct 22 2019 Andrei Belov <defan@nginx.com>
+- base version updated to 1.17.5
+
 * Tue Sep 24 2019 Konstantin Pavlov <thresh@nginx.com>
 - base version updated to 1.17.4
 
