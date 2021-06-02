@@ -2,10 +2,10 @@
 set -e
 set -u
 
-OPENSSL='openssl-1.1.1c'
-NGINXVER='1.17.6'
+OPENSSL='openssl-1.1.1k'
+NGINXVER='1.21.0'
 NGINXREL='1'
-NJSVER='0.3.7'
+NJSVER='0.5.3'
 REPO='el7'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
@@ -19,7 +19,7 @@ fi
 echo $REPOURL
 
 RPMLIST="nginx-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
-nginx-module-njs-$NGINXVER.$NJSVER-$NGINXREL.$REPO.ngx.src.rpm
+nginx-module-njs-$NGINXVER+$NJSVER-$NGINXREL.$REPO.ngx.src.rpm
 nginx-module-geoip-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
 nginx-module-perl-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
 nginx-module-image-filter-$NGINXVER-$NGINXREL.$REPO.ngx.src.rpm
@@ -50,14 +50,14 @@ done
 cp -a $PRJDIR/*.spec $PRJDIR/contrib/
 
 sed -i "s#^\%if 0\%{?rhel} == 7#\%if ( 0\%{\?rhel} == 7 ) || ( 0\%{?fedora} >= 18 )#" $PRJDIR/contrib/*.spec
-sed -i "s#^Version: .*#Version: \%{main_version}#"                                    $PRJDIR/contrib/*.spec
-sed -i "s#^Release: .*#Release: \%{main_release}#"                                    $PRJDIR/contrib/*.spec
+sed -i "s#^Version: .*#Version: \%{base_version}#"                                    $PRJDIR/contrib/*.spec
+sed -i "s#^Release: .*#Release: \%{base_release}#"                                    $PRJDIR/contrib/*.spec
 
-sed -i "s#^Requires: nginx == .*#Requires: nginx == \%{?epoch:\%{epoch}:}\%{main_version}-\%{main_release}#" $PRJDIR/contrib/*.spec
+sed -i "s#^Requires: nginx == .*#Requires: nginx == \%{?epoch:\%{epoch}:}\%{base_version}-\%{base_release}#" $PRJDIR/contrib/*.spec
 
 sed -i "s#^Source0:#Source90: $OPENSSL.tar.gz\nSource0:#" $PRJDIR/contrib/*.spec
 sed -i "s|^\%prep|\%prep\n\
-tar -zxf \%{_sourcedir}/nginx-\%{main_version}.tar.gz -C \%{_sourcedir}\n\
+tar -zxf \%{_sourcedir}/nginx-\%{base_version}.tar.gz -C \%{_sourcedir}\n\
 find \%{_sourcedir}\n\
 tar -zxf \%{_sourcedir}/$OPENSSL.tar.gz -C \%{_builddir}\n\
 |" $PRJDIR/contrib/*.spec
@@ -69,10 +69,10 @@ sed -i 's|^\%define os_minor.*$|\%define os_minor 4|' contrib/*.spec
 
 sed -i "s|^\%setup -q$|\%setup\n|" $PRJDIR/contrib/*.spec
 #sed -i "s|^\%setup -q$|\%setup\n\
-#tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
+#tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{base_version}.tar.gz\n\
 #|" $PRJDIR/contrib/*.spec
 
-#sed -i "s|^tar --strip-components=1.*|tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{main_version}.tar.gz\n\
+#sed -i "s|^tar --strip-components=1.*|tar --strip-components=1 -zxf \%{_sourcedir}/\%{name}-\%{version}/nginx-\%{base_version}.tar.gz\n\
 #|" $PRJDIR/contrib/*.spec
 
 
