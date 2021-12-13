@@ -1,3 +1,4 @@
+BuildRequires: perl-IPC-Cmd
 #
 %define nginx_user nginx
 %define nginx_group nginx
