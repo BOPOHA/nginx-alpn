@@ -41,14 +41,14 @@ Epoch: %{epoch}
 
 BuildRequires: libedit-devel
 
-%define base_version 1.21.0
+%define base_version 1.21.4
 %define base_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{base_version}
 
 Summary: nginx njs dynamic modules
 Name: nginx-module-njs
-Version: 1.21.0+0.5.3
+Version: 1.21.4+0.7.0
 Release: 1%{?dist}.ngx
 Vendor: NGINX Packaging <nginx-packaging@f5.com>
 URL: https://nginx.org/
@@ -57,7 +57,7 @@ Group: %{_group}
 Source0: https://nginx.org/download/nginx-%{base_version}.tar.gz
 Source1: nginx-module-njs.copyright
 
-Source100: njs-0.5.3.tar.gz
+Source100: njs-0.7.0.tar.gz
 
 
 
@@ -80,7 +80,7 @@ nginx njs dynamic modules.
 %define WITH_LD_OPT -Wl,-z,relro -Wl,-z,now
 
 %define BASE_CONFIGURE_ARGS $(echo "--prefix=%{_sysconfdir}/nginx --sbin-path=%{_sbindir}/nginx --modules-path=%{_libdir}/nginx/modules --conf-path=%{_sysconfdir}/nginx/nginx.conf --error-log-path=%{_localstatedir}/log/nginx/error.log --http-log-path=%{_localstatedir}/log/nginx/access.log --pid-path=%{_localstatedir}/run/nginx.pid --lock-path=%{_localstatedir}/run/nginx.lock --http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp --http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp --http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp --user=%{nginx_user} --group=%{nginx_group} --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module")
-%define MODULE_CONFIGURE_ARGS $(echo "--add-dynamic-module=njs-0.5.3/nginx")
+%define MODULE_CONFIGURE_ARGS $(echo "--add-dynamic-module=njs-0.7.0/nginx")
 
 %prep
 %setup -qcTn %{name}-%{base_version}
@@ -91,7 +91,7 @@ ln -s njs-* njs
 
 
 %build
-cd %{bdir}/njs-0.5.3 && ./configure && make njs
+cd %{bdir}/njs-0.7.0 && ./configure && make njs
 cd %{bdir}
 
 ./configure %{BASE_CONFIGURE_ARGS} %{MODULE_CONFIGURE_ARGS} \
@@ -100,7 +100,7 @@ cd %{bdir}
 	--with-debug
 make %{?_smp_mflags} modules
 for so in `find %{bdir}/objs/ -type f -name "*.so"`; do
-debugso=`echo $so | sed -e "s|.so|-debug.so|"`
+debugso=`echo $so | sed -e 's|\.so$|-debug.so|'`
 mv $so $debugso
 done
 
@@ -116,9 +116,9 @@ cd %{bdir}
 %{__install} -m 644 -p %{SOURCE1} \
     $RPM_BUILD_ROOT%{_datadir}/doc/nginx-module-njs/COPYRIGHT
 
-%{__install} -m644 %{bdir}/njs-0.5.3/CHANGES $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/
+%{__install} -m644 %{bdir}/njs-0.7.0/CHANGES $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/
 %{__mkdir} -p $RPM_BUILD_ROOT%{_bindir}
-%{__install} -m755 %{bdir}/njs-0.5.3/build/njs $RPM_BUILD_ROOT%{_bindir}/
+%{__install} -m755 %{bdir}/njs-0.7.0/build/njs $RPM_BUILD_ROOT%{_bindir}/
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_libdir}/nginx/modules
 for so in `find %{bdir}/objs/ -maxdepth 1 -type f -name "*.so"`; do
@@ -167,6 +167,30 @@ BANNER
 fi
 
 %changelog
+* Tue Nov  2 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.4+0.7.0-1%{?dist}.ngx
+- base version updated to 1.21.4-1
+
+* Tue Oct 19 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.3+0.7.0-1%{?dist}.ngx
+- njs updated to 0.7.0
+
+* Tue Sep  7 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.3+0.6.2-1%{?dist}.ngx
+- base version updated to 1.21.3-1
+
+* Tue Aug 31 2021 Andrei Belov <defan@nginx.com> - 1.21.2+0.6.2-1%{?dist}.ngx
+- base version updated to 1.21.2-1
+
+* Tue Aug 31 2021 Andrei Belov <defan@nginx.com> - 1.21.1+0.6.2-1%{?dist}.ngx
+- njs updated to 0.6.2
+
+* Tue Jul  6 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.1+0.6.1-1%{?dist}.ngx
+- base version updated to 1.21.1-1
+
+* Tue Jun 29 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.0+0.6.1-1%{?dist}.ngx
+- njs updated to 0.6.1
+
+* Tue Jun 15 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.0+0.6.0-1%{?dist}.ngx
+- njs updated to 0.6.0
+
 * Tue May 25 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.0+0.5.3-1%{?dist}.ngx
 - base version updated to 1.21.0-1
 
