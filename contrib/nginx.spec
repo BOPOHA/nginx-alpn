@@ -1,4 +1,5 @@
 BuildRequires: perl-IPC-Cmd
+BuildRequires: perl-Data-Dumper
 #
 %define nginx_home %{_localstatedir}/cache/nginx
 %define nginx_user nginx

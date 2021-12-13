@@ -78,7 +78,7 @@ sed -i "s|^\%setup -q$|\%setup\n|" $PRJDIR/contrib/*.spec
 
 sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=\%{_builddir}/$OPENSSL --with-openssl-opt=enable-tls1_3|g" $PRJDIR/contrib/*.spec
 # add custom /BuildRequires for the openssl-3.0.0
-sed -i '1s/^/BuildRequires: perl-IPC-Cmd\n/'   $PRJDIR/contrib/*.spec
+sed -i '1s/^/BuildRequires: perl-IPC-Cmd\nBuildRequires: perl-Data-Dumper\n/'   $PRJDIR/contrib/*.spec
 
 #rm -rf $TMPDIR/*src.rpm*
 echo 'DONE'

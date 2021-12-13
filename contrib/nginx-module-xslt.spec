@@ -1,4 +1,5 @@
 BuildRequires: perl-IPC-Cmd
+BuildRequires: perl-Data-Dumper
 #
 %define nginx_user nginx
 %define nginx_group nginx
