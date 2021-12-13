@@ -41,14 +41,14 @@ Epoch: %{epoch}
 
 BuildRequires: libxslt-devel
 
-%define base_version 1.21.0
+%define base_version 1.21.4
 %define base_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{base_version}
 
 Summary: nginx xslt dynamic module
 Name: nginx-module-xslt
-Version: 1.21.0
+Version: 1.21.4
 Release: 1%{?dist}.ngx
 Vendor: NGINX Packaging <nginx-packaging@f5.com>
 URL: https://nginx.org/
@@ -97,7 +97,7 @@ cd %{bdir}
 	--with-debug
 make %{?_smp_mflags} modules
 for so in `find %{bdir}/objs/ -type f -name "*.so"`; do
-debugso=`echo $so | sed -e "s|.so|-debug.so|"`
+debugso=`echo $so | sed -e 's|\.so$|-debug.so|'`
 mv $so $debugso
 done
 
@@ -159,6 +159,18 @@ BANNER
 fi
 
 %changelog
+* Tue Nov  2 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.4-1%{?dist}.ngx
+- base version updated to 1.21.4-1
+
+* Tue Sep  7 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.3-1%{?dist}.ngx
+- base version updated to 1.21.3-1
+
+* Tue Aug 31 2021 Andrei Belov <defan@nginx.com> - 1.21.2-1%{?dist}.ngx
+- base version updated to 1.21.2-1
+
+* Tue Jul  6 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.1-1%{?dist}.ngx
+- base version updated to 1.21.1-1
+
 * Tue May 25 2021 Konstantin Pavlov <thresh@nginx.com> - 1.21.0-1%{?dist}.ngx
 - base version updated to 1.21.0-1
 

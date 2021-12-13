@@ -2,10 +2,10 @@
 set -e
 set -u
 
-OPENSSL='openssl-1.1.1k'
-NGINXVER='1.21.0'
+OPENSSL='openssl-1.1.1l'
+NGINXVER='1.21.4'
 NGINXREL='1'
-NJSVER='0.5.3'
+NJSVER='0.7.0'
 REPO='el7'
 
 OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
